@@ -35,7 +35,7 @@ export const Config: Schema<Config> = Schema.intersect([
       Schema.const(false).description('不发送文本'),
     ]).description('触发指令后发送的文本'),
     waitTime: Schema.number().default(0).description('翻开答案之书后等待发送答案的时间'),
-    answerBookResultPattern: Schema.union(['图片模式', '中文文本模式', '中文文本模式(带空格)', '英文(小写)文本模式', '英文(大写)文本模式', '中英文(小写)文本模式', '中英文(小写)文本模式(带空格)', '中英文(大写)文本模式', '中英文(大写)文本模式(带空格)']).description('答案之书返回结果的模式'),
+    answerBookResultPattern: Schema.union(['图片模式', '中文文本模式', '中文文本模式(带空格)', '英文(小写)文本模式', '英文(大写)文本模式', '中英文(小写)文本模式', '中英文(小写)文本模式(带空格)', '中英文(大写)文本模式', '中英文(大写)文本模式(带空格)']).default('图片模式').description('答案之书返回结果的模式'),
     isEnableImageCompression: Schema.boolean().default(true).description('是否压缩图片'),
   }).description('基础配置'),
   Schema.union([
