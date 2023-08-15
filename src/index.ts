@@ -286,7 +286,6 @@ async function registerCommands(ctx: Context, config: Config) {
 
 
           }
-          console.log(textObject)
           await page.close();
           // 返回buffer
           return { buffer, textObject };

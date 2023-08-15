@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-my-answer-book",
   "description": "翻开一本神秘的书，得到你心中问题的答案。📚",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
