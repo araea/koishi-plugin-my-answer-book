@@ -1,6 +1,6 @@
 {
   "name": "koishi-plugin-my-answer-book",
-  "description": "",
+  "description": "翻开一本神秘的书，得到你心中问题的答案。📚",
   "version": "0.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -9,13 +9,25 @@
     "dist"
   ],
   "license": "MIT",
+  "author": "Nawyjx <3373167460@qq.com>",
+  "homepage": "https://www.npmjs.com/package/koishi-plugin-my-answer-book?activeTab=readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araea/koishi-plugin-my-answer-book.git"
+  },
   "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "answer",
+    "answer-book",
+    "answerBook",
+    "答案之书",
+    "答案"
   ],
   "peerDependencies": {
     "koishi": "^4.14.1"
-  }
+  },
+  "dependencies": {}
 }
