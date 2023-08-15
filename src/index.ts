@@ -1,4 +1,4 @@
-import { Context, Schema, Logger, h } from 'koishi'
+import { Context, Schema, Logger, h, sleep } from 'koishi'
 import puppeteer, { Browser, Page } from "puppeteer-core"
 import crypto from 'crypto'
 import find from 'puppeteer-finder'
@@ -77,39 +77,44 @@ async function registerCommands(ctx: Context, config: Config) {
 
       const result = await getAnswer(userAgent)
 
-      async function wait(n: number) {
-        // 使用Promise构造函数创建一个Promise对象，它会在n秒后resolve
-        let promise = new Promise(resolve => {
-          setTimeout(resolve, n * 1000); // n * 1000 是 n 秒的毫秒数
-        });
-        // 使用await关键字等待Promise对象的结果
-        await promise;
-      }
+      // async function wait(n: number) {
+      //   // 使用Promise构造函数创建一个Promise对象，它会在n秒后resolve
+      //   let promise = new Promise(resolve => {
+      //     setTimeout(resolve, n * 1000); // n * 1000 是 n 秒的毫秒数
+      //   });
+      //   // 使用await关键字等待Promise对象的结果
+      //   await promise;
+      // }
 
-      await wait(config.waitTime)
+      // await wait(config.waitTime)
 
-      // 根据配置的答案模式返回不同的结果
+      await sleep(config.waitTime * 1000)
+
+      const userId = h.at(session.userId);
+      const chineseText = result.textObject.chineseText;
+      const englishText = result.textObject.englishText;
+
       switch (config.answerBookResultPattern) {
         case '图片模式':
-          return h.image(result.buffer, 'image/png')
+          return `${userId} ~\n${h.image(result.buffer, 'image/png')}`;
         case '中文文本模式':
-          return result.textObject.chineseText
+          return `${userId} ~\n${chineseText}`;
         case '中文文本模式(带空格)':
-          return addSpacesBetweenChineseCharacters(result.textObject.chineseText)
+          return `${userId} ~\n${addSpacesBetweenChineseCharacters(chineseText)}`;
         case '英文(小写)文本模式':
-          return result.textObject.englishText
+          return `${userId} ~\n${englishText}`;
         case '英文(大写)文本模式':
-          return result.textObject.englishText.toUpperCase()
+          return `${userId} ~\n${englishText.toUpperCase()}`;
         case '中英文(小写)文本模式':
-          return `${result.textObject.englishText}\n${result.textObject.chineseText}`
+          return `${userId} ~\n${englishText}\n${chineseText}`;
         case '中英文(小写)文本模式(带空格)':
-          return `${result.textObject.englishText}\n${result.textObject.chineseText}`
+          return `${userId} ~\n${englishText}\n${chineseText}`;
         case '中英文(大写)文本模式':
-          return `${result.textObject.englishText.toUpperCase()}\n${result.textObject.chineseText}`
+          return `${userId} ~\n${englishText.toUpperCase()}\n${chineseText}`;
         case '中英文(大写)文本模式(带空格)':
-          return `${result.textObject.englishText.toUpperCase()}\n${addSpacesBetweenChineseCharacters(result.textObject.chineseText)}`
+          return `${userId} ~\n${englishText.toUpperCase()}\n${addSpacesBetweenChineseCharacters(chineseText)}`;
         default:
-          return '无效的答案模式'
+          return '无效的答案模式';
       }
 
 
